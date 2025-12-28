@@ -7,6 +7,7 @@ const exportLink = document.getElementById("exportLink");
 const packagingEl = document.getElementById("packaging");
 const sweetsEl = document.getElementById("sweets");
 const responsesEl = document.getElementById("responses");
+const peopleEl = document.getElementById("people");
 
 loadBtn.addEventListener("click", async () => {
   const token = tokenInput.value.trim();
@@ -17,7 +18,7 @@ loadBtn.addEventListener("click", async () => {
     return;
   }
 
-  // 👉 Guardamos token para checklist
+  // Guardamos token para checklist
   localStorage.setItem("ADMIN_TOKEN", token);
 
   msg.textContent = "Cargando...";
@@ -58,11 +59,13 @@ clearBtn.addEventListener("click", async () => {
   packagingEl.innerHTML = "";
   sweetsEl.innerHTML = "";
   responsesEl.innerHTML = "";
+  peopleEl.innerHTML = "";
   msg.textContent = "Datos borrados";
   msg.className = "small success";
 });
 
 function renderSummary(summary) {
+  // Compra sugerida
   packagingEl.innerHTML = `
     <table>
       <tr><th>Item</th><th>Cantidad</th></tr>
@@ -72,6 +75,7 @@ function renderSummary(summary) {
     </table>
   `;
 
+  // Mesa dulce
   sweetsEl.innerHTML = `
     <table>
       <tr><th>Producto</th><th>Sugerido</th></tr>
@@ -81,8 +85,25 @@ function renderSummary(summary) {
     </table>
   `;
 
+  // Personas
+  if (summary.responses && summary.responses.length > 0) {
+    peopleEl.innerHTML = `
+      <ul>
+        ${summary.responses.map(r => `
+          <li>
+            <strong>${r.name || "Sin nombre"}</strong>
+            <span class="small"> (${r.ageGroup})</span>
+          </li>
+        `).join("")}
+      </ul>
+    `;
+  } else {
+    peopleEl.innerHTML = `<div class="small">Todavía nadie cargó datos.</div>`;
+  }
+
+  // Resumen técnico
   responsesEl.innerHTML = `
-    <div class="badge">Respuestas: ${summary.count}</div>
+    <div class="badge">Respuestas totales: ${summary.count}</div>
     <div class="badge">Factor calor: ${summary.heatFactor}</div>
   `;
 }
