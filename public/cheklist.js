@@ -37,14 +37,28 @@ function persist() {
 
 async function loadChecklist() {
   const saved = localStorage.getItem(STORAGE_KEY);
+
   if (saved) {
-    const parsed = JSON.parse(saved);
-    checklist = parsed.checklist;
-    totalsCache = parsed.totals;
-    renderAll();
-    return;
+    try {
+      const parsed = JSON.parse(saved);
+
+      // ✅ VALIDACIÓN REAL
+      if (
+        Array.isArray(parsed.checklist) &&
+        parsed.checklist.length > 0 &&
+        parsed.totals
+      ) {
+        checklist = parsed.checklist;
+        totalsCache = parsed.totals;
+        renderAll();
+        return;
+      }
+    } catch (e) {
+      // si falla el parse, seguimos normal
+    }
   }
 
+  // 👉 SI NO HAY DATA VÁLIDA, PEDIMOS AL BACKEND
   const res = await fetch("/api/admin/checklist", {
     headers: { "x-admin-token": ADMIN_TOKEN }
   });
