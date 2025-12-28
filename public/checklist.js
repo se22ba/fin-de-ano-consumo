@@ -145,23 +145,68 @@ function renderChart(totals) {
     (totals.sidra_na_l || 0);
 
   const total = alcohol + noAlcohol || 1;
-  const aPct = alcohol / total;
 
+  const alcoholPct = alcohol / total;
+  const noAlcoholPct = noAlcohol / total;
+
+  // ===== PIE =====
   const cx = canvas.width / 2;
-  const cy = 110;
-  const r = 70;
+  const cy = 90;
+  const r = 60;
 
+  // Alcohol
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.fillStyle = "#ff7c7c";
-  ctx.arc(cx, cy, r, 0, Math.PI * 2 * aPct);
+  ctx.arc(cx, cy, r, 0, Math.PI * 2 * alcoholPct);
   ctx.fill();
 
+  // Sin alcohol
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.fillStyle = "#4f7cff";
-  ctx.arc(cx, cy, r, Math.PI * 2 * aPct, Math.PI * 2);
+  ctx.arc(
+    cx,
+    cy,
+    r,
+    Math.PI * 2 * alcoholPct,
+    Math.PI * 2
+  );
   ctx.fill();
+
+  // ===== TEXTO CENTRAL =====
+  ctx.fillStyle = "#e8eefc";
+  ctx.font = "bold 14px system-ui";
+  ctx.textAlign = "center";
+  ctx.fillText(
+    `${Math.round(alcoholPct * 100)}%`,
+    cx,
+    cy + 5
+  );
+
+  // ===== LEYENDA (HTML) =====
+  let legend = document.getElementById("chartLegend");
+  if (!legend) {
+    legend = document.createElement("div");
+    legend.id = "chartLegend";
+    legend.style.display = "grid";
+    legend.style.gridTemplateColumns = "1fr 1fr";
+    legend.style.gap = "8px";
+    legend.style.marginTop = "12px";
+    legend.style.fontSize = "14px";
+    canvas.parentElement.appendChild(legend);
+  }
+
+  legend.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="width:14px;height:14px;border-radius:50%;background:#ff7c7c"></span>
+      <strong>Alcohol</strong> ${Math.round(alcoholPct * 100)}%
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="width:14px;height:14px;border-radius:50%;background:#4f7cff"></span>
+      <strong>Sin alcohol</strong> ${Math.round(noAlcoholPct * 100)}%
+    </div>
+  `;
 }
 
 document.getElementById("recalcBtn").addEventListener("click", () => {
