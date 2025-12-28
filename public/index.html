@@ -1,59 +1,54 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fin de Año - Selección de consumo</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Fin de Año – Selección</title>
+  <link rel="stylesheet" href="/styles.css"/>
 </head>
 <body>
-  <header>
-    <div style="max-width:920px;margin:0 auto;padding:0 16px;">
-      <h2 style="margin:0;">🥂 Fin de Año: ¿qué vas a tomar y picar?</h2>
-      <div class="small">Marcá opciones múltiples. Esto alimenta el “plan de compras” para que no falte (ni sobre como presupuesto inflado 😄).</div>
-    </div>
-  </header>
 
-  <main>
-    <div class="card">
-      <div class="row">
-        <div>
-          <label>Nombre</label>
-          <input id="name" placeholder="Ej: Seba" maxlength="60" />
-        </div>
-        <div>
-          <label>Grupo</label>
-          <select id="ageGroup">
-            <option value="adult">Adulto</option>
-            <option value="teen">Adolescente (12-13)</option>
-            <option value="kid">Niño (6-11)</option>
-            <option value="toddler">Peque (0-5)</option>
-          </select>
-        </div>
-      </div>
+<header>
+  <div class="container">
+    <h2>🥂 Fin de Año</h2>
+    <div class="small">Marcá qué vas a tomar y comer.</div>
+  </div>
+</header>
+
+<main>
+  <div class="card row">
+    <div>
+      <label>Nombre</label>
+      <input id="name" placeholder="Ej: Seba"/>
     </div>
 
-    <div class="card">
-      <fieldset>
-        <legend>🥤 Bebidas</legend>
-        <div id="drinks" class="grid"></div>
-        <div class="small">Tip: con +40°C el admin calcula con factor de calor automáticamente.</div>
-      </fieldset>
+    <div>
+      <label>Grupo</label>
+      <select id="ageGroup">
+        <option value="adult">Adulto</option>
+        <option value="teen">Adolescente</option>
+        <option value="kid">Niño</option>
+        <option value="toddler">Peque</option>
+      </select>
     </div>
+  </div>
 
-    <div class="card">
-      <fieldset>
-        <legend>🍬 Mesa dulce</legend>
-        <div id="sweets" class="grid"></div>
-      </fieldset>
-    </div>
+  <div class="card">
+    <h3>🥤 Bebidas</h3>
+    <div id="drinks" class="grid"></div>
+  </div>
 
-    <div class="card">
-      <button id="saveBtn">Guardar mi selección</button>
-      <p id="msg" class="small"></p>
-    </div>
-  </main>
+  <div class="card">
+    <h3>🍬 Mesa dulce</h3>
+    <div id="sweets" class="grid"></div>
+  </div>
 
-  <script src="/app.js"></script>
+  <div class="card">
+    <button id="saveBtn">Guardar selección</button>
+    <p id="msg" class="small"></p>
+  </div>
+</main>
+
+<script src="/app.js"></script>
 </body>
 </html>

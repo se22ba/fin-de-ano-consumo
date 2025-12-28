@@ -1,52 +1,54 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin - Fin de Año</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin – Fin de Año</title>
+  <link rel="stylesheet" href="/styles.css"/>
 </head>
 <body>
-  <header>
-    <div style="max-width:920px;margin:0 auto;padding:0 16px;">
-      <h2 style="margin:0;">📊 Admin - Resumen de compra</h2>
-      <div class="small">Ingresá el token de admin y mirá resultados + cálculo final.</div>
-    </div>
-  </header>
 
-  <main>
-    <div class="card row">
-      <div>
-        <label>Admin token</label>
-        <input id="token" placeholder="x-admin-token" />
-      </div>
-      <div style="display:flex;align-items:end;gap:10px;">
-        <button id="loadBtn">Cargar resumen</button>
-        <button id="clearBtn" class="secondary">Borrar todo</button>
-        <a id="exportLink" target="_blank" class="secondary button-like">
-  📱 Exportar para celular
-</a>
-      </div>
-      <div class="small">Se toma HEAT_FACTOR del .env (por defecto 1.35 para +40°C).</div>
-      <p id="msg" class="small"></p>
+<header>
+  <div class="container">
+    <h2>📊 Admin – Resumen de compra</h2>
+    <div class="small">Vista mobile-first para controlar todo desde el celu.</div>
+  </div>
+</header>
+
+<main>
+  <div class="card row">
+    <div>
+      <label>Admin token</label>
+      <input id="token" placeholder="x-admin-token"/>
     </div>
 
-    <div class="card">
-      <h3 style="margin-top:0;">🧾 Sugerencia de compra</h3>
-      <div id="packaging"></div>
+    <div class="actions">
+      <button id="loadBtn">Cargar resumen</button>
+      <button id="clearBtn" class="secondary">Borrar todo</button>
+      <a id="exportLink" class="button-like" target="_blank">
+        📱 Ver checklist
+      </a>
     </div>
 
-    <div class="card">
-      <h3 style="margin-top:0;">🍬 Mesa dulce</h3>
-      <div id="sweets"></div>
-    </div>
+    <p id="msg" class="small"></p>
+  </div>
 
-    <div class="card">
-      <h3 style="margin-top:0;">👥 Respuestas</h3>
-      <div id="responses"></div>
-    </div>
-  </main>
+  <div class="card">
+    <h3>🧾 Compra sugerida</h3>
+    <div id="packaging"></div>
+  </div>
 
-  <script src="/admin.js"></script>
+  <div class="card">
+    <h3>🍬 Mesa dulce</h3>
+    <div id="sweets"></div>
+  </div>
+
+  <div class="card">
+    <h3>👥 Respuestas</h3>
+    <div id="responses"></div>
+  </div>
+</main>
+
+<script src="/admin.js"></script>
 </body>
 </html>
