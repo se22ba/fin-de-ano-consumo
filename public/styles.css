@@ -1,0 +1,50 @@
+:root { font-family: system-ui, Arial, sans-serif; }
+body { margin: 0; background: #0b0f17; color: #e8eefc; }
+header { padding: 18px 16px; border-bottom: 1px solid rgba(255,255,255,.08); }
+main { max-width: 920px; margin: 0 auto; padding: 16px; }
+.card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 16px; margin: 12px 0; }
+.row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 680px) { .row { grid-template-columns: 1fr; } }
+label { display: block; margin: 8px 0 6px; opacity: .9; }
+input, select, button {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.2);
+  color: #e8eefc;
+}
+button { cursor: pointer; border: none; background: #4f7cff; font-weight: 700; }
+button.secondary { background: rgba(255,255,255,.12); }
+fieldset { border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 12px; }
+legend { padding: 0 8px; opacity: .85; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+.chk { display: flex; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+.chk input { width: 18px; height: 18px; }
+.small { opacity: .8; font-size: 13px; }
+.success { color: #7CFF9D; }
+.error { color: #FF7C7C; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+.badge { display: inline-block; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,.10); font-size: 12px; }
+@media (prefers-color-scheme: light) {
+  body {
+    background: #f5f7fb;
+    color: #0b0f17;
+  }
+
+  .card {
+    background: #ffffff;
+    border-color: #e0e4ef;
+  }
+
+  header {
+    border-bottom-color: #e0e4ef;
+  }
+
+  .check-item {
+    background: #f3f5fb;
+    border-color: #e0e4ef;
+  }
+}

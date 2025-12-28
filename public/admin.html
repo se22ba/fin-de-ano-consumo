@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Fin de Año</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <div style="max-width:920px;margin:0 auto;padding:0 16px;">
+      <h2 style="margin:0;">📊 Admin - Resumen de compra</h2>
+      <div class="small">Ingresá el token de admin y mirá resultados + cálculo final.</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card row">
+      <div>
+        <label>Admin token</label>
+        <input id="token" placeholder="x-admin-token" />
+      </div>
+      <div style="display:flex;align-items:end;gap:10px;">
+        <button id="loadBtn">Cargar resumen</button>
+        <button id="clearBtn" class="secondary">Borrar todo</button>
+        <a id="exportLink" target="_blank" class="secondary button-like">
+  📱 Exportar para celular
+</a>
+      </div>
+      <div class="small">Se toma HEAT_FACTOR del .env (por defecto 1.35 para +40°C).</div>
+      <p id="msg" class="small"></p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">🧾 Sugerencia de compra</h3>
+      <div id="packaging"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">🍬 Mesa dulce</h3>
+      <div id="sweets"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">👥 Respuestas</h3>
+      <div id="responses"></div>
+    </div>
+  </main>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
