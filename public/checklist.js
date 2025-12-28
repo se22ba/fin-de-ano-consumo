@@ -132,11 +132,12 @@ function renderProgress() {
 function renderChart(totals) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const alcohol =
-    (totals.beer_blonde_l || 0) +
-    (totals.beer_dark_l || 0) +
-    (totals.sidra_l || 0) +
-    (totals.anana_fizz_l || 0);
+ const alcohol =
+  (totals.beer_blonde_l || 0) +
+  (totals.beer_dark_l || 0) +
+  (totals.sidra_l || 0) +
+  (totals.anana_fizz_l || 0) +
+  ((totals.fernet_ml || 0) / 1000);
 
   const noAlcohol =
     (totals.coke_l || 0) +
