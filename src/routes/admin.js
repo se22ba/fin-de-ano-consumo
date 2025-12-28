@@ -5,18 +5,47 @@ import { calculateAggregate } from "../services/calculator.js";
 
 export const adminRouter = express.Router();
 
+/* =========================
+   RESPUESTAS CRUD (debug)
+========================= */
 adminRouter.get("/api/admin/responses", adminAuth, async (req, res) => {
-  const responses = await Response.find().sort({ updatedAt: -1 }).lean();
+  const responses = await Response.find()
+    .sort({ updatedAt: -1 })
+    .lean();
+
   res.json({ ok: true, data: responses });
 });
 
+/* =========================
+   SUMMARY (FIX CLAVE)
+========================= */
 adminRouter.get("/api/admin/summary", adminAuth, async (req, res) => {
   const heatFactor = Number(process.env.HEAT_FACTOR || "1.35");
+
   const responses = await Response.find().lean();
-  const summary = calculateAggregate(responses, heatFactor);
+
+  // 🔢 Cálculos agregados (ya existían)
+  const summaryCalc = calculateAggregate(responses, heatFactor);
+
+  // 👥 NUEVO: lista de personas
+  const responsesList = responses.map(r => ({
+    name: r.name,
+    ageGroup: r.ageGroup,
+    selections: r.selections
+  }));
+
+  // 📦 SUMMARY FINAL (extendido, no rompe nada)
+  const summary = {
+    ...summaryCalc,
+    responses: responsesList
+  };
+
   res.json({ ok: true, summary });
 });
 
+/* =========================
+   EXPORT HTML
+========================= */
 adminRouter.get("/api/admin/export/html", adminAuth, async (req, res) => {
   const heatFactor = Number(process.env.HEAT_FACTOR || "1.35");
   const responses = await Response.find().lean();
@@ -89,6 +118,9 @@ adminRouter.get("/api/admin/export/html", adminAuth, async (req, res) => {
   res.send(html);
 });
 
+/* =========================
+   CHECKLIST DATA
+========================= */
 adminRouter.get("/api/admin/checklist", adminAuth, async (req, res) => {
   const heatFactor = Number(process.env.HEAT_FACTOR || "1.35");
   const responses = await Response.find().lean();
@@ -112,6 +144,9 @@ adminRouter.get("/api/admin/checklist", adminAuth, async (req, res) => {
   });
 });
 
+/* =========================
+   CLEAR ALL
+========================= */
 adminRouter.delete("/api/admin/clear", adminAuth, async (req, res) => {
   await Response.deleteMany({});
   res.json({ ok: true });
